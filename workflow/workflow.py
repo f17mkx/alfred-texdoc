@@ -31,6 +31,7 @@ import logging.handlers
 import os
 import pickle
 import plistlib
+
 import re
 import shutil
 import string
@@ -39,6 +40,7 @@ import sys
 import time
 import unicodedata
 from six import string_types
+from .util import atomic_writer, LockFile, uninterruptible
 
 try:
     import xml.etree.cElementTree as ET
@@ -52,7 +54,6 @@ except ImportError:  # pragma: no cover
 #     LockFile,
 #     uninterruptible,
 # )
-from util import atomic_writer, LockFile, uninterruptible
 
 #: Sentinel for properties that haven't been set yet (that might
 #: correctly have the value ``None``)
