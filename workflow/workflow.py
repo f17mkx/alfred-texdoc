@@ -38,6 +38,7 @@ import subprocess
 import sys
 import time
 import unicodedata
+from six import string_types
 
 try:
     import xml.etree.cElementTree as ET
@@ -1102,7 +1103,7 @@ class Workflow(object):
             if self.alfred_env.get('workflow_bundleid'):
                 self._bundleid = self.alfred_env.get('workflow_bundleid')
             else:
-                self._bundleid = unicode(self.info['bundleid'], 'utf-8')
+                self._bundleid = str(self.info['bundleid'], 'utf-8')
 
         return self._bundleid
 
@@ -1568,7 +1569,7 @@ class Workflow(object):
             self.logger.debug('no data stored for `%s`', name)
             return None
 
-        with open(metadata_path, 'rb') as file_obj:
+        with open(metadata_path, 'r') as file_obj:
             serializer_name = file_obj.read().strip()
 
         serializer = manager.serializer(serializer_name)
@@ -2080,7 +2081,7 @@ class Workflow(object):
 
             if not sys.stdout.isatty():  # Show error in Alfred
                 if text_errors:
-                    print(unicode(err).encode('utf-8'), end='')
+                    print(str(err).encode('utf-8'), end='')
                 else:
                     self._items = []
                     if self._name:
@@ -2090,7 +2091,7 @@ class Workflow(object):
                     else:  # pragma: no cover
                         name = os.path.dirname(__file__)
                     self.add_item("Error in workflow '%s'" % name,
-                                  unicode(err),
+                                  str(err),
                                   icon=ICON_ERROR)
                     self.send_feedback()
             return 1
@@ -2241,8 +2242,9 @@ class Workflow(object):
                 return False
 
             version = self.version
-
-        if isinstance(version, basestring):
+        # from six import string_types
+        # if isinstance(version, basestring):
+        if isinstance(version, string_types):
             from update import Version
             version = Version(version)
 
@@ -2456,7 +2458,7 @@ class Workflow(object):
             h = groups.get('hex')
             password = groups.get('pw')
             if h:
-                password = unicode(binascii.unhexlify(h), 'utf-8')
+                password = str(binascii.unhexlify(h), 'utf-8')
 
         self.logger.debug('got password : %s:%s', service, account)
 
@@ -2698,8 +2700,8 @@ class Workflow(object):
         """
         encoding = encoding or self._input_encoding
         normalization = normalization or self._normalizsation
-        if not isinstance(text, unicode):
-            text = unicode(text, encoding)
+        if not isinstance(text, str):
+            text = str(text, encoding)
         return unicodedata.normalize(normalization, text)
 
     def fold_to_ascii(self, text):
@@ -2718,7 +2720,7 @@ class Workflow(object):
         if isascii(text):
             return text
         text = ''.join([ASCII_REPLACEMENTS.get(c, c) for c in text])
-        return unicode(unicodedata.normalize('NFKD',
+        return str(unicodedata.normalize('NFKD',
                        text).encode('ascii', 'ignore'))
 
     def dumbify_punctuation(self, text):

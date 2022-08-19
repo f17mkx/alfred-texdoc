@@ -106,7 +106,8 @@ class Variables(dict):
             str: UTF-8 encoded ``alfredworkflow`` JSON object
 
         """
-        return unicode(self).encode('utf-8')
+        # return unicode(self).encode('utf-8')
+        return self.__unicode__().encode('utf-8')
 
 
 class Modifier(object):

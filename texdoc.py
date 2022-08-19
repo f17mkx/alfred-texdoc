@@ -17,7 +17,7 @@ def main(wf):
     results = check_output(['texdoc', '--list', '-M', args[0]])
 
     if len(results) != 0:
-        lines = results.split('\n')
+        lines = str(results).split('\n')
         for line in lines:
             item = parseLine(line)
             wf.add_item(basename(item['file']),

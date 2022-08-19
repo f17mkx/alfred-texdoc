@@ -1,4 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
+
+#!/usr/bin/env python3
 # encoding: utf-8
 #
 # Copyright (c) 2015 deanishe@deanishe.net
@@ -32,6 +34,8 @@ import sys
 import tarfile
 import tempfile
 import uuid
+
+# from AppKit import NSWorkspace, NSImage
 
 import workflow
 
@@ -133,6 +137,7 @@ def install_notifier():
     # until I figure out a better way of excluding this module
     # from coverage in py2.6.
     if sys.version_info >= (2, 7):  # pragma: no cover
+
         from AppKit import NSWorkspace, NSImage
 
         ws = NSWorkspace.sharedWorkspace()
