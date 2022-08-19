@@ -19,6 +19,9 @@ Alternatively, if you want to build from the repository, run the following instr
 make alfredworkflow # build the workflow
 make install  # install into Alfred
 ```
+```bash
+make clean # clean
+```
 ## Usage
 
 ### Keyword `td`

@@ -71,7 +71,7 @@
 				<string>Searching...</string>
 				<key>script</key>
 				<string>export PATH=/usr/texbin/:/Library/TeX/texbin:$PATH
-/usr/bin/python texdoc.py "{query}"</string>
+/usr/bin/python3 texdoc.py "{query}"</string>
 				<key>subtext</key>
 				<string>Search your local the TeX documentation</string>
 				<key>title</key>

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding utf-8
 
 import sys
@@ -14,7 +14,7 @@ log = None
 
 def main(wf):
     args = wf.args
-    results = check_output(["texdoc", '--list', '-M', args[0]])
+    results = check_output(['texdoc', '--list', '-M', args[0]])
 
     if len(results) != 0:
         lines = results.split('\n')
@@ -36,7 +36,7 @@ def main(wf):
 def parseLine(line):
     # Line has format "<KEYWORD> <SCORE> <PATH> <DESCRIPTIONS>"
     values = line.split('\t',3)
-    fields = ('keyword','score','file','description')
+    fields = ('keyword', 'score', 'file', 'description')
     # Build dictionary with values
     result = dict((field,'') for field in fields)
     for (field,value) in zip(fields, values):

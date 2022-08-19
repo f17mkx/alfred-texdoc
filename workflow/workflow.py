@@ -22,7 +22,8 @@ up your Python script to best utilise the :class:`Workflow` object.
 from __future__ import print_function, unicode_literals
 
 import binascii
-import cPickle
+# import cPickle
+import _pickle as cPickle
 from copy import deepcopy
 import json
 import logging
@@ -43,12 +44,14 @@ try:
 except ImportError:  # pragma: no cover
     import xml.etree.ElementTree as ET
 
-from util import (
-    AcquisitionError,  # imported to maintain API
-    atomic_writer,
-    LockFile,
-    uninterruptible,
-)
+
+# from util import (
+#     AcquisitionError,  # imported to maintain API
+#     atomic_writer,
+#     LockFile,
+#     uninterruptible,
+# )
+from util import atomic_writer, LockFile, uninterruptible
 
 #: Sentinel for properties that haven't been set yet (that might
 #: correctly have the value ``None``)
