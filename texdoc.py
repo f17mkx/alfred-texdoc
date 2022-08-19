@@ -14,7 +14,7 @@ log = None
 
 def main(wf):
     args = wf.args
-    args = ['enumi']
+    # args = ['enumi']
     results = check_output(['texdoc', '--list', '-M', args[0]])
 
     if len(results) != 0:
